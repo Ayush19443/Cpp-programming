@@ -1,0 +1,40 @@
+#include<stdio.h>
+#include<math.h>
+
+float f(float x)
+{
+    float y=1/(1+x*x);
+    return y;
+}
+
+void main()
+{
+    float l, u, ans=0.0, h, k,p;
+    int i, si;
+    printf("Enter lower and upper limit: ");
+    scanf("%f%f", &l,&u);
+    printf("Enter number of sub intervals: ");
+    scanf("%d", &si);
+    h = (u - l)/si;
+    printf("Y\n");
+    for(i=0;i<=si;i++)
+    {
+     p=l+i*h;
+     printf("%f\n",f(p));
+    }
+    ans = f(l) + f(u);
+    for(i=1; i<= si-1; i++)
+    {
+        k = l + i*h;
+        if(i%2==0)
+        {
+            ans = ans + 2 * f(k);
+        }
+        else
+        {
+            ans = ans + 4 * f(k);
+        }
+    }
+    ans = ans * h/3;
+    printf("\nIntegration is: %.3f", ans);
+}
